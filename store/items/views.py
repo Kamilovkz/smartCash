@@ -4,3 +4,4 @@ from django.http import HttpResponse
 
 def index(request):
     return HttpResponse("Hello Django. You are at the items index.")
+# Test message
