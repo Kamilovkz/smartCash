@@ -1,0 +1,19 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+</head>
+<body>
+    {% if latest_items_list %}
+    <ul>
+    {% for item in latest_items_list %}
+        <li><a href="/items/{{ question.id }}/">{{ item.item_name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No items are available.</p>
+{% endif %}
+</body>
+</html>
