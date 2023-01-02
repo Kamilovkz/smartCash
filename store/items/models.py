@@ -1,25 +1,25 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-# Create your models here.
-class Stock(models.Model):
-    item_name = models.CharField(max_length=100)
-    item_type = models.CharField(max_length=100)
-    item_model_number = models.CharField(max_length=100)
-    item_country = models.CharField(max_length=100)
-    item_buying_date = models.DateField()
-    item_cost = models.CharField(max_length=100)
-    item_quantity = models.IntegerField(null=False, default=0)
+class Glasses(models.Model):
+    name = models.CharField(max_length=255)
+    type = models.CharField(max_length=255)
+    model = models.CharField(max_length=255)
+    size = models.CharField(max_length=255)
+    country = models.CharField(max_length=255)
+    price = models.DecimalField(max_digits=9, decimal_places=2)
+    stock = models.PositiveIntegerField()
 
-    def __str__(self):
-        return self.item_name
-
-
-class Product(models.Model):
-    name = models.ForeignKey(Stock, on_delete=models.CASCADE)
-    selling_date = models.DateField(null=True, blank=True)
-    selling_price = models.CharField(max_length=100)
-    
     def __str__(self):
         return self.name
-    
 
+class Order(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    glasses = models.ForeignKey(Glasses, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField()
+    total_price = models.DecimalField(max_digits=9, decimal_places=2)
+    date_placed = models.DateField(auto_now_add=True)
+    status = models.CharField(max_length=255, default='pending')
+
+    def __str__(self):
+        return f'Order {self.pk} by {self.user.username}'
