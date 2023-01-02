@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Smart Cash</h1>
+
+    {% for glasses in glasses %}
+        <div>
+            <h2>{{ glasses.name }}</h2>
+            <p>Type: {{ glasses.type }}</p>
+            <p>Model: {{ glasses.model }}</p>
+            <p>Size: {{ glasses.size }}</p>
+            <p>Country: {{ glasses.country }}</p>
+            <p>Price: {{ glasses.price }}</p>
+            {% if glasses.stock.available %}
+                <p>Stock: {{ glasses.stock.quantity }}</p>
+                <form action="{% url 'place_order' glasses.pk %}" method="post">
+                    {% csrf_token %}
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" name="quantity" min="1" max="{{ glasses.stock.quantity }}">
+                    <input type="submit" value="Place order">
+                </form>
+            {% else %}
+                <p>Out of stock</p>
+            {% endif %}
+        </div>
+    {% endfor %}
+{% endblock %}
