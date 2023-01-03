@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <h1>Glasses List</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Model</th>
+                    <th>Size</th>
+                    <th>Country</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for glasses in glasses %}
+                    <tr>
+                        <td>{{ glasses.name }}</td>
+                        <td>{{ glasses.type }}</td>
+                        <td>{{ glasses.model }}</td>
+                        <td>{{ glasses.size }}</td>
+                        <td>{{ glasses.country }}</td>
+                        <td>${{ glasses.price }}</td>
+                        <td>{{ glasses.stock }}</td>
+                        <td><a href="#" class="btn btn-primary">Add to Cart</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
