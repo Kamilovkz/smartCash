@@ -5,8 +5,8 @@ Welcome to Smart Cash, a web application for small business owners to manage the
 ## Features
 * Customizable expense categories to match your business needs
 * User-friendly interface for adding, editing, and deleting expenses
-* Chart and graph visualizations to help you understand your financial performance
-* Secure login system to protect your data
+* Chart and graph visualizations to help you understand your financial performance (Soon)
+* Secure login system to protect your data (Soon)
 
 ## Technologies Used
 Smart Cash is built with the following technologies:
