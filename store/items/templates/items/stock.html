@@ -1,8 +1,13 @@
 {% extends "base.html" %}
 
+
 {% block content %}
     <div class="container">
-        <h1>Glasses List</h1>
+        <div class = 'abovetable'>
+            <h1>Glasses List</h1>
+            <td><a href="#" class="btn btn-primary">Add</a></td>
+        </div>
+        
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -25,7 +30,7 @@
                         <td>{{ glasses.country }}</td>
                         <td>₸{{ glasses.price }}</td>
                         <td>{{ glasses.stock }}</td>
-                        <!-- <td><a href="#" class="btn btn-primary">Add to Cart</a></td> -->
+                        <td><a href="#" class="btn btn-danger">Delete</a></td>
                     </tr>
                 {% endfor %}
             </tbody>
