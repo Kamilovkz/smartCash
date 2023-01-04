@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 
-
 {% block content %}
     <div class="container">
         <div class = 'abovetable'>
@@ -28,7 +27,7 @@
                         <td>{{ glasses.model }}</td>
                         <td>{{ glasses.size }}</td>
                         <td>{{ glasses.country }}</td>
-                        <td>₸{{ glasses.price }}</td>
+                        <td>${{ glasses.price }}</td>
                         <td>{{ glasses.stock }}</td>
                         <td><a href="#" class="btn btn-danger">Delete</a></td>
                     </tr>
