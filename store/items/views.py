@@ -29,3 +29,8 @@ def index(request):
 
 def about(request):
     return render(request, 'items/about.html')
+
+class OrdersListView(ListView):
+    model = Order
+    context_object_name = 'orders'
+    template_name = 'items/orders.html'
