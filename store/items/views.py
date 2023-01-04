@@ -17,12 +17,13 @@ class OrdersListView(ListView):
     context_object_name = 'orders'
     template_name = 'items/orders.html'
 
-# Form class for input data (add glasses)
+# Form for input data (add glasses)
 class GlassesForm(forms.ModelForm):
     class Meta:
         model = Glasses
         fields = ['name', 'type', 'model', 'size', 'country', 'price', 'stock']
 
+# Add glasses to stock 
 def add_stock(request):
     if request.method == 'POST':
         form = GlassesForm(request.POST)
@@ -32,6 +33,36 @@ def add_stock(request):
     else:
         form = GlassesForm()
     return render(request, 'items/add_stock.html', {'form': form})
+
+
+
+
+
+# Form for input data (add orders)
+class OrdersForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = ['user', 'glasses', 'quantity', 'status']
+
+def add_order(request):
+    if request.method == 'POST':
+        form = OrdersForm(request.POST)
+        if form.is_valid():
+            # Retrieve the glasses info
+            glasses = form.cleaned_data['glasses']
+            quantity = form.cleaned_data['quantity']
+            total_price = glasses.price * quantity
+            glasses.stock -= quantity
+            glasses.save()
+
+            # Create and save the Order object
+            order = form.save(commit=False)
+            order.total_price = total_price
+            order.save()
+            return redirect('success')
+    else:
+        form = OrdersForm
+    return render(request, 'items/add_order.html', {'form': form})
 
 
 def index(request):
