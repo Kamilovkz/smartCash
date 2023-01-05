@@ -2,6 +2,14 @@
 
 {% block content %}
     <div class="container">
+        <div>
+            {% for msg in messages %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>{{ msg }}</strong> glasses was added successfully! 
+                    <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        </div>
         <div class = 'abovetable'>
             <h1>Glasses List</h1>
             <td><a href="{% url 'add_stock' %}" class="btn btn-primary">Add</a></td>

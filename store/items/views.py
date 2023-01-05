@@ -4,6 +4,7 @@ from .models import Glasses, Order
 from django.template import Context, loader
 from django.http import HttpResponse
 from django import forms
+from django.contrib import messages
 
 # Display all glasses list
 class GlassesListView(ListView):
@@ -29,6 +30,7 @@ def add_stock(request):
         form = GlassesForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, f"{form.cleaned_data['name']}")
             return redirect('/stock/')
     else:
         form = GlassesForm()
