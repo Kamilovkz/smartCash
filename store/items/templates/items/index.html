@@ -1,9 +1,11 @@
 {% extends "base.html" %}
+
 {% block content %}
+    
     <div class="container">
-        <h1>The main page Index file</h1>
+        <button type="button" class="btn btn-primary" onclick="toggleMessage()">+</button>
     </div>
-    <div class="container">
-        
+    <div id="message-container" style="display: none;">
+        <h1>Hello It's me</h1>
     </div>
 {% endblock %}

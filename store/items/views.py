@@ -70,14 +70,20 @@ def about(request):
     return render(request, 'items/about.html')
 
 # We need changes here
-def make_order(request, pk):
-    glasses = Glasses.objects.get(pk=pk)
-    quantity = request.POST.get('quantity')
-    total_price = glasses.price * int(quantity)
-    Order.objects.create(
-        user=request.user,
-        glasses=glasses,
-        quantity=quantity,
-        total_price=total_price
-    )
-    return render(request, 'items/order_confirmation.html', {'glasses': glasses, 'quantity': quantity, 'total_price': total_price})
+def make_order(request):
+    if request.method == 'POST':
+        form = OrdersForm(request.POST)
+        if form.is_valid():
+            glasses = Glasses.objects.get(pk=form.cleaned_data['name'])
+            order = Order(
+                glasses = glasses,
+                quantity=form.cleaned_data['quantity'],
+                total_price=glasses.price * form.cleaned_data['quantity'],
+                user = request.user
+            )
+            order.save()
+    else:
+        form = OrdersForm()
+    orders = Order.objects.filter(user=request.user)
+    glasses = Glasses.objects.all()
+    return render (request, 'items/index.html', {'form': form, 'orders': orders, 'glasses': glasses})
