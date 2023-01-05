@@ -34,16 +34,12 @@ def add_stock(request):
         form = GlassesForm()
     return render(request, 'items/add_stock.html', {'form': form})
 
-
-
-
-
 # Form for input data (add orders)
 class OrdersForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = ['user', 'glasses', 'quantity', 'status']
-
+# Add orders to Database
 def add_order(request):
     if request.method == 'POST':
         form = OrdersForm(request.POST)
@@ -59,7 +55,7 @@ def add_order(request):
             order = form.save(commit=False)
             order.total_price = total_price
             order.save()
-            return redirect('success')
+            return redirect('orders/')
     else:
         form = OrdersForm
     return render(request, 'items/add_order.html', {'form': form})

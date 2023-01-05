@@ -19,7 +19,7 @@ class Order(models.Model):
     quantity = models.PositiveIntegerField()
     total_price = models.DecimalField(max_digits=9, decimal_places=2)
     date_placed = models.DateField(auto_now_add=True)
-    status = models.CharField(max_length=255, default='pending')
+    status = models.CharField(max_length=255, default='confirmed')
 
     def __str__(self):
         return f'Order {self.pk} by {self.user.username}'
