@@ -29,7 +29,7 @@ def add_stock(request):
         form = GlassesForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('success')
+            return redirect('/stock/')
     else:
         form = GlassesForm()
     return render(request, 'items/add_stock.html', {'form': form})
@@ -55,7 +55,7 @@ def add_order(request):
             order = form.save(commit=False)
             order.total_price = total_price
             order.save()
-            return redirect('orders/')
+            return redirect('/orders/')
     else:
         form = OrdersForm
     return render(request, 'items/add_order.html', {'form': form})
