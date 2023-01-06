@@ -37,7 +37,20 @@
                         <td>{{ glasses.country }}</td>
                         <td>${{ glasses.price }}</td>
                         <td>{{ glasses.stock }}</td>
-                        <td><a href="#" class="btn btn-danger">Delete</a></td>
+                        <script>
+                            function deleteRow(id) {
+                              $.ajax({
+                                url: '/stock/' + id,
+                                type: 'DELETE',
+                                success: function(result) {
+                                  // Reload the page or display a success message
+                                }
+                              });
+                            }
+                          </script>
+                        <td>
+                            <button class="btn btn-danger" onclick="deleteRow('{{ item.name }}')">Delete</button>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>

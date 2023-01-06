@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import ListView
 from .models import Glasses, Order
 from django.template import Context, loader
-from django.http import HttpResponse
+from django.http import HttpResponseNotAllowed
 from django import forms
 from django.contrib import messages
 
@@ -65,11 +65,26 @@ def add_order(request):
     return render(request, 'items/add_order.html', {'form': form})
 
 
+def delete_stock(request):
+    if request.method == 'DELETE':
+        form = GlassesForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            Glasses.objects.filter(name=name).delete()
+            messages.success(request, f"{name} deleted")
+            return redirect('/stock/')
+    else:
+        return HttpResponseNotAllowed(['DELETE'])
+
+
 def index(request):
     return render(request, 'items/index.html')
 
 def about(request):
     return render(request, 'items/about.html')
+
+
+
 
 # We need changes here
 def make_order(request):
