@@ -1,11 +1,27 @@
 {% extends "base.html" %}
-
+{% load widget_tweaks %}
 {% block content %}
     
     <div class="container">
-        <button type="button" class="btn btn-primary" onclick="toggleMessage()">+</button>
-    </div>
-    <div id="message-container" style="display: none;">
-        <h1>Hello It's me</h1>
+        <div class="abovetable">
+            <button type="button" class="btn btn-primary" onclick="toggleMessage()">+</button>
+            <div id="message-container" style="display: block;">
+                <div class="container">
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+                        {% for field in form %}
+                            <div class="form-group">
+                                {{ field.label_tag }}
+                                {% render_field field class="form-control" %}
+                                {% if field.help_text %}
+                                    <small class="form-text text-muted">{{ fields.help_text }}</small> 
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

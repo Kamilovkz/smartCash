@@ -41,6 +41,7 @@ class OrdersForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = ['user', 'glasses', 'quantity', 'status']
+
 # Add orders to Database
 def add_order(request):
     if request.method == 'POST':
@@ -57,6 +58,7 @@ def add_order(request):
             order = form.save(commit=False)
             order.total_price = total_price
             order.save()
+            messages.success(request, f"{form.cleaned_data['glasses']}")
             return redirect('/orders/')
     else:
         form = OrdersForm
