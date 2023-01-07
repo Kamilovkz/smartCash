@@ -65,17 +65,13 @@ def add_order(request):
     return render(request, 'items/add_order.html', {'form': form})
 
 
-def delete_stock(request):
-    if request.method == 'DELETE':
-        form = GlassesForm(request.POST)
-        if form.is_valid():
-            name = form.cleaned_data['name']
-            Glasses.objects.filter(name=name).delete()
-            messages.success(request, f"{name} deleted")
-            return redirect('/stock/')
-    else:
-        return HttpResponseNotAllowed(['DELETE'])
-
+def delete_item(request, pk):
+    project = Glasses.objects.get(id=pk)
+    if request.method == 'POST':
+        project.delete()
+        return redirect('/stock/')
+    context = {'object': project}
+    return render(request, 'items/delete_item.html', context)
 
 def update_order(request, pk):
     order = Order.objects.get(id=pk)
