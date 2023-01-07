@@ -85,6 +85,7 @@ def update_order(request, pk):
         if form.is_valid():
             inital_quantity = form['quantity'].initial
             order.update_stock(inital_quantity)
+            order.calculate_total_price()
             form.save()
             messages.success(request, f"{form.cleaned_data['glasses']} was changed successfully!")
             return redirect('/orders/')
