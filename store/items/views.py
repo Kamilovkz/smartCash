@@ -83,8 +83,9 @@ def update_order(request, pk):
     if request.method == 'POST':
         form = OrdersForm(request.POST, instance=order)
         if form.is_valid():
+            inital_quantity = form['quantity'].initial
+            order.update_stock(inital_quantity)
             form.save()
-            order.update_stock()  # update the stock of the related Glasses instance
             return redirect('/orders/')
     context = {'form': form}
     return render(request, "items/add_order.html", context)

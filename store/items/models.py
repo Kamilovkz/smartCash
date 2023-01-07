@@ -27,6 +27,9 @@ class Order(models.Model):
     def calculate_total_price(self):
         self.total_price = self.glasses.price * self.quantity
     
-    def update_stock(self):
+    def update_stock(self, inital_quantity):
+        self.glasses.stock += inital_quantity
         self.glasses.stock -= self.quantity
         self.glasses.save()
+    
+    
