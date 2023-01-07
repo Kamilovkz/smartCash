@@ -4,8 +4,8 @@
     <div class="container">
         <div>
             {% for msg in messages %}
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>{{ msg }}</strong> order was added successfully! 
+                <div class="alert alert-success alert-dismissible fade show" role="alert"> 
+                    {{ msg }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             {% endfor %}

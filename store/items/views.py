@@ -30,7 +30,7 @@ def add_stock(request):
         form = GlassesForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, f"{form.cleaned_data['name']}")
+            messages.success(request, f"{form.cleaned_data['name']} glasses was added successfully!")
             return redirect('/stock/')
     else:
         form = GlassesForm()
@@ -86,6 +86,7 @@ def update_order(request, pk):
             inital_quantity = form['quantity'].initial
             order.update_stock(inital_quantity)
             form.save()
+            messages.success(request, f"{form.cleaned_data['glasses']} was changed successfully!")
             return redirect('/orders/')
     context = {'form': form}
     return render(request, "items/add_order.html", context)
