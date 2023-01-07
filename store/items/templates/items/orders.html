@@ -37,7 +37,8 @@
                         <td>${{ order.total_price }}</td>
                         <td>{{ order.date_placed }}</td>
                         <td>{{ order.status }}</td>
-                        <td><button class="btn btn-secondary">edit</button></td>
+                        <!-- <td><button class="btn btn-secondary">edit</button></td> -->
+                        <td><a href="{% url 'update-order' order.id %}">Edit</a></td>
                     </tr>
                 {% endfor %}
             </tbody>

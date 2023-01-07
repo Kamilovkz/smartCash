@@ -77,14 +77,25 @@ def delete_stock(request):
         return HttpResponseNotAllowed(['DELETE'])
 
 
-def index(request):
-    return render(request, 'items/index.html')
+def update_order(request, pk):
+    order = Order.objects.get(id=pk)
+    form = OrdersForm(instance=order)
+    if request.method == 'POST':
+        form = OrdersForm(request.POST, instance=order)
+        if form.is_valid():
+            form.save()
+            order.update_stock()  # update the stock of the related Glasses instance
+            return redirect('/orders/')
+    context = {'form': form}
+    return render(request, "items/add_order.html", context)
+
+
+
 
 def about(request):
     return render(request, 'items/about.html')
-
-
-
+def index(request):
+    return render(request, 'items/index.html')
 
 # We need changes here
 def make_order(request):
