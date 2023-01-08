@@ -38,7 +38,7 @@
                         <td>${{ glasses.price }}</td>
                         <td>{{ glasses.stock }}</td>
                         <td>
-                            <a href="{% url 'delete_item' glasses.id %}">Delete</a>
+                            <a href="{% url 'delete_item' glasses.id %}" onclick="return confirm('Are you sure, want to delete ' + '{{glasses.name}}' + '?')">Delete</a>
                         </td>
                     </tr>
                 {% endfor %}

@@ -24,6 +24,12 @@ class GlassesForm(forms.ModelForm):
         model = Glasses
         fields = ['name', 'type', 'model', 'size', 'country', 'price', 'stock']
 
+# Form for input data (add orders)
+class OrdersForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = ['user', 'glasses', 'quantity', 'status']
+
 # Add glasses to stock 
 def add_stock(request):
     if request.method == 'POST':
@@ -35,12 +41,6 @@ def add_stock(request):
     else:
         form = GlassesForm()
     return render(request, 'items/add_stock.html', {'form': form})
-
-# Form for input data (add orders)
-class OrdersForm(forms.ModelForm):
-    class Meta:
-        model = Order
-        fields = ['user', 'glasses', 'quantity', 'status']
 
 # Add orders to Database
 def add_order(request):
@@ -64,14 +64,26 @@ def add_order(request):
         form = OrdersForm
     return render(request, 'items/add_order.html', {'form': form})
 
+def show_stock(request):
+    details = Glasses.objects.all()
+    return render(request, 'items/stock.html', {'data': details})
+
+
+# Deleting Stock items and redirect to Stock page
 
 def delete_item(request, pk):
-    project = Glasses.objects.get(id=pk)
-    if request.method == 'POST':
-        project.delete()
-        return redirect('/stock/')
-    context = {'object': project}
-    return render(request, 'items/delete_item.html', context)
+    display_item = Glasses.objects.get(id=pk)
+    display_item.delete()
+    show_stock(request)
+    return redirect('/stock/')
+
+# def delete_item(request, pk):
+#     project = Glasses.objects.get(id=pk)
+#     if request.method == 'POST':
+#         project.delete()
+#         return redirect('/stock/')
+#     context = {'object': project}
+#     return render(request, 'items/delete_item.html', context)
 
 def update_order(request, pk):
     order = Order.objects.get(id=pk)
