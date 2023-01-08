@@ -1,9 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView
+from .forms import GlassesForm, OrdersForm
 from .models import Glasses, Order
-from django.template import Context, loader
-from django.http import HttpResponseNotAllowed
-from django import forms
 from django.contrib import messages
 
 # Display all glasses list
@@ -17,18 +15,6 @@ class OrdersListView(ListView):
     model = Order
     context_object_name = 'orders'
     template_name = 'items/orders.html'
-
-# Form for input data (add glasses)
-class GlassesForm(forms.ModelForm):
-    class Meta:
-        model = Glasses
-        fields = ['name', 'type', 'model', 'size', 'country', 'price', 'stock']
-
-# Form for input data (add orders)
-class OrdersForm(forms.ModelForm):
-    class Meta:
-        model = Order
-        fields = ['user', 'glasses', 'quantity', 'status']
 
 # Add glasses to stock 
 def add_stock(request):
@@ -58,33 +44,20 @@ def add_order(request):
             order = form.save(commit=False)
             order.total_price = total_price
             order.save()
-            messages.success(request, f"{form.cleaned_data['glasses']}")
+            messages.success(request, f"{form.cleaned_data['glasses']} glasses was added!")
             return redirect('/orders/')
     else:
         form = OrdersForm
     return render(request, 'items/add_order.html', {'form': form})
 
-def show_stock(request):
-    details = Glasses.objects.all()
-    return render(request, 'items/stock.html', {'data': details})
-
-
 # Deleting Stock items and redirect to Stock page
-
 def delete_item(request, pk):
     display_item = Glasses.objects.get(id=pk)
     display_item.delete()
-    show_stock(request)
+    # show_stock(request)
     return redirect('/stock/')
 
-# def delete_item(request, pk):
-#     project = Glasses.objects.get(id=pk)
-#     if request.method == 'POST':
-#         project.delete()
-#         return redirect('/stock/')
-#     context = {'object': project}
-#     return render(request, 'items/delete_item.html', context)
-
+# Update a order
 def update_order(request, pk):
     order = Order.objects.get(id=pk)
     form = OrdersForm(instance=order)
@@ -100,29 +73,10 @@ def update_order(request, pk):
     context = {'form': form}
     return render(request, "items/add_order.html", context)
 
-
-
-
-def about(request):
-    return render(request, 'items/about.html')
+# The main page
 def index(request):
     return render(request, 'items/index.html')
 
-# We need changes here
-def make_order(request):
-    if request.method == 'POST':
-        form = OrdersForm(request.POST)
-        if form.is_valid():
-            glasses = Glasses.objects.get(pk=form.cleaned_data['name'])
-            order = Order(
-                glasses = glasses,
-                quantity=form.cleaned_data['quantity'],
-                total_price=glasses.price * form.cleaned_data['quantity'],
-                user = request.user
-            )
-            order.save()
-    else:
-        form = OrdersForm()
-    orders = Order.objects.filter(user=request.user)
-    glasses = Glasses.objects.all()
-    return render (request, 'items/index.html', {'form': form, 'orders': orders, 'glasses': glasses})
+# About project
+def about(request):
+    return render(request, 'items/about.html')
