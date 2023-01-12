@@ -21,6 +21,8 @@ def add_stock(request):
     if request.method == 'POST':
         form = GlassesForm(request.POST)
         if form.is_valid():
+            glasses_count = Glasses.objects.filter(type='glasses').count()
+            print(glasses_count)
             form.save()
             messages.success(request, f"{form.cleaned_data['name']} glasses was added successfully!")
             return redirect('/stock/')
