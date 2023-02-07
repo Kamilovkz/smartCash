@@ -5,6 +5,5 @@ __pycache__/
 local_settings.py
 media/
 static/
-venv/
-venv2/
 store/items/migrations/
+env/
