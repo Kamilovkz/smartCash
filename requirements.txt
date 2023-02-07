@@ -1,3 +1,2 @@
-install before:
-
-pip3 install django-widget-tweaks 
+django-widget-tweaks 
+django
