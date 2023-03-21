@@ -2,6 +2,14 @@
 {% load widget_tweaks %}
 {% block content%}
     <div class="container">
+        <div>
+            {% for msg in messages %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert"> 
+                    {{ msg }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        </div>
         <form method="post" novalidate>
             {% csrf_token %}
             {% for field in form %}
