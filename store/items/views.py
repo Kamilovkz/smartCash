@@ -32,7 +32,6 @@ def add_stock(request):
 
 # Add orders to Database
 def add_order(request):
-    success_flag = True
     if request.method == 'POST':
         form = OrdersForm(request.POST)
         if form.is_valid():
@@ -41,7 +40,6 @@ def add_order(request):
             quantity = form.cleaned_data['quantity']
             total_price = glasses.price * quantity
             if glasses.stock - quantity < 0:
-                success_flag = False
                 messages.warning(request, f"There is no such amount in the database. There are only {glasses.stock} pairs")
                 print("ERROR")
             else:
