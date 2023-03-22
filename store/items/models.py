@@ -13,15 +13,13 @@ class Glasses(models.Model):
     def __str__(self):
         return self.name
 
-class Discount_Order(models.Model):
-    discount = models.IntegerField(default='0')
-
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     glasses = models.ForeignKey(Glasses, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
     total_price = models.DecimalField(max_digits=9, decimal_places=2)
     date_placed = models.DateField(auto_now_add=True)
+    discount = models.IntegerField(default='0')
     status = models.CharField(max_length=255, default='confirmed')
 
     def __str__(self):

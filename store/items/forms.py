@@ -1,5 +1,5 @@
 from django import forms
-from .models import Glasses, Order, Discount_Order
+from .models import Glasses, Order
 
 # Form for input data (add glasses)
 class GlassesForm(forms.ModelForm):
@@ -11,9 +11,4 @@ class GlassesForm(forms.ModelForm):
 class OrdersForm(forms.ModelForm):
     class Meta:
         model = Order
-        fields = ['user', 'glasses', 'quantity', 'status']
-
-class DiscountForm(forms.ModelForm):
-    class Meta:
-        model = Discount_Order
-        fields = ['discount']
+        fields = ['user', 'glasses', 'quantity', 'discount', 'status']

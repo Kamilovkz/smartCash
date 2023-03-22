@@ -38,10 +38,13 @@ def add_order(request):
             # Retrieve the glasses info
             glasses = form.cleaned_data['glasses']
             quantity = form.cleaned_data['quantity']
-            total_price = glasses.price * quantity
+            if form.cleaned_data['discount'] > 0:
+                discount = (glasses.price / 100) * form.cleaned_data['discount']
+                total_price = (glasses.price - discount) * quantity 
+            else:
+                total_price = glasses.price * quantity
             if glasses.stock - quantity < 0:
                 messages.warning(request, f"There is no such amount in the database. There are only {glasses.stock} pairs")
-                print("ERROR")
             else:
                 glasses.stock -= quantity
                 glasses.save()
