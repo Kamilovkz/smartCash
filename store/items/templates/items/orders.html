@@ -37,7 +37,7 @@
                         <td>{{ order.quantity }}</td>
                         <td>${{ order.total_price }}</td>
                         <td>{{ order.date_placed }}</td>
-                        <td>{{ discount }}</td>
+                        <td>{{ order.discount }}</td>
                         <td>{{ order.status }}</td>
                         <td><a href="{% url 'update-order' order.id %}">Edit</a></td>
                     </tr>
