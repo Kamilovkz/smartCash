@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+    <html>
+        <head>
+            <title>Instructions Smart Cash</title>
+        </head>
+        <body>
+            <div class='container'>
+                <h1>Instruction for using Smart Cash</h1>
+                <p>
+                    Welcome to our platform! We offer two main options: stock and orders. Here's a simple guide to get started:
+                    If you don't have any items in your stock yet, you can create a new item by clicking on the "Create" button in 
+                    the stock section. You'll need to provide some basic information about the item, such as its name and quantity.
+                    Once you have some items in your stock, you can create an order by clicking on the "Create" button in the orders 
+                    section. You'll need to select the item you want to order and specify the quantity. Our system will automatically 
+                    check if there are enough items in stock to fulfill your order. If there are, the order will be sent and the 
+                    quantity of the ordered item will be deducted from the stock. If there aren't enough items in stock, the order 
+                    will not be sent and you'll be notified. That's it! Our platform takes care of the math for you, so you don't need to 
+                    worry about calculating the correct quantity. If you have any questions or need further assistance, 
+                    don't hesitate to reach out to our support team.
+                </p>
+            </div>
+        </body>
+    </html>
+{% endblock %}

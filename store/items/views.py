@@ -93,3 +93,8 @@ def instructions(request):
 # About project
 def about(request):
     return render(request, 'items/about.html')
+
+# About project
+def reports(request):
+    return render(request, 'items/reports.html')
+
