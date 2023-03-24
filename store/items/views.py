@@ -86,15 +86,3 @@ def update_order(request, pk):
 def index(request):
     return render(request, 'items/index.html')
 
-# Instructions page
-def instructions(request):
-    return render(request, 'items/instructions.html')
-
-# About project
-def about(request):
-    return render(request, 'items/about.html')
-
-# About project
-def reports(request):
-    return render(request, 'items/reports.html')
-
