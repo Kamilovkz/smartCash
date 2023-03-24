@@ -5,7 +5,7 @@ from items.scripts import instructions as instruction
 from items.scripts import about as about
 from items.scripts import index as index
 from items.scripts import order as orders
-from items.scripts import stocks as stocks
+from items.scripts import stock as stocks
 
 urlpatterns = [
     
