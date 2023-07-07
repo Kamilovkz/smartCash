@@ -6,4 +6,4 @@ local_settings.py
 media/
 static/
 store/items/migrations/
-env/
+.env
