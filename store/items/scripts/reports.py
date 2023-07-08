@@ -1,5 +1,5 @@
 from .config import render, model_to_dict
-from ..models import Order
+from items.models import Order
 
 
 def reports(request):
