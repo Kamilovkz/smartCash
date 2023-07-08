@@ -25,7 +25,7 @@ class Order(models.Model):
     status = models.CharField(max_length=255, default="confirmed")
 
     def __str__(self):
-        return f"Order {self.pk} by {self.user.username}"
+        return f"{self.glasses} sold in {self.quantity} quantity by price {self.total_price}$"
 
     def calculate_total_price(self):
         self.total_price = self.glasses.price * self.quantity

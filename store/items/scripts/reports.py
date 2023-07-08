@@ -3,6 +3,5 @@ from items.models import Order
 
 
 def reports(request):
-    queryset = Order.objects.all().values()
-    context = {"data": queryset}
-    return render(request, "./items/reports.html", context)
+    reports_data = Order.objects.all()
+    return render(request, "./items/reports.html", {"reports": reports_data})
